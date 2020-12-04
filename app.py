@@ -10,12 +10,13 @@ app.config["SECRET_KEY"] = "nininini"
 @app.route("/library/", methods=["GET", "POST"])
 def library():
     form = BookForm()
-    if request == "POST":
+    error = ""
+    if request.method == "POST":
         if form.validate_on_submit():
             bookstore.create(form.data)
             bookstore.save_all()
         return redirect(url_for("library"))
-    return render_template("library.html", form=form, library=bookstore.allitems)
+    return render_template("library.html", form=form, library=bookstore.all(), error=error)
 
 
 @app.route("/library/<int:book_id>/", methods=["GET", "POST"])
