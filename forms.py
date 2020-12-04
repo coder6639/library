@@ -9,3 +9,4 @@ class BookForm(FlaskForm):
     pages = IntegerField("pages", validators=[DataRequired()])
     description = TextAreaField("description")
     price = FloatField("price", validators=[DataRequired()])
+
