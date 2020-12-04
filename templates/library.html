@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Księgozbiór</title>
+    <style>
+        table, th, tr, td {border: 1px solid blue;}
+        table.center {
+            margin-left: auto;
+            margin-right: auto;
+        }
+    </style>
+</head>
+<body>
+    <h3>Spis książek: </h3>
+    <table>
+        <thead>
+        <th>Tytuł</th>
+        <th>Autor</th>
+        <th>Liczba stron</th>
+        <th>Opis</th>
+        <th>Cena (PLN)</th>
+        </thead>
+        {% for book in library %}
+        <tr>
+            <td><a href="/library/{{ loop.index }}">{{ book.title }}</a> </td>
+            <td>{{ book.author }}</td>
+            <td>{{ book.pages }}</td>
+            <td>{{ book.description }}</td>
+            <td>{{ book.price }}</td>
+        </tr>
+        {% endfor %}
+    </table>
+    <div>
+        <h3>Dodaj nową książkę: </h3>
+        <form method="POST" action="/library/">
+            {{ form.hidden_tag() }}
+            <table>
+                {% for field in form if field.widget.input_type != "hidden" %}
+                <tr>
+                    <th>{{ field.label }} {% if field.flags.required %}*{% endif %}</th>
+                    <td>{{ field }}</td>
+                </tr>
+            {% endfor %}
+            </table>
+            <input type="submit" value="Dodaj">
+        </form>
+    </div>
+</body>
+</html>
