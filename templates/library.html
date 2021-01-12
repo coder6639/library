@@ -5,43 +5,41 @@
     <title>Księgozbiór</title>
     <style>
         table, th, tr, td {border: 1px solid blue;}
-        table.center {
-            margin-left: auto;
-            margin-right: auto;
-        }
+        table { border-collapse: collapse;}
     </style>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
 </head>
 <body>
     <h3>Spis książek: </h3>
-    <table>
+    <table class="top">
         <thead>
-        <th>Tytuł</th>
-        <th>Autor</th>
-        <th>Liczba stron</th>
-        <th>Opis</th>
-        <th>Cena (PLN)</th>
+        <th>#</th>
+        <th>Title</th>
+        <th>Author</th>
+        <th>Pages</th>
+        <th>Description</th>
+        <th>Price (PLN)</th>
         </thead>
         {% for book in library %}
         <tr>
-            <td><a href="/library/{{ loop.index }}">{{ book.title }}</a> </td>
-            <td>{{ book.author }}</td>
-            <td>{{ book.pages }}</td>
-            <td>{{ book.description }}</td>
-            <td>{{ book.price }}</td>
+            {% for item in book %}
+            <th> {{ item }} </th>
+            {% endfor %}
+            <th><a href="/library/{{ loop.index }}">Edytuj</a></th>
         </tr>
         {% endfor %}
     </table>
     <div>
-        <h3>Dodaj nową książkę: </h3>
+        <h3 class="add">Dodaj nową książkę: </h3>
         <form method="POST" action="/library/">
             {{ form.hidden_tag() }}
-            <table>
+            <table class="bottom" style="width:280px">
                 {% for field in form if field.widget.input_type != "hidden" %}
                 <tr>
                     <th>{{ field.label }} {% if field.flags.required %}*{% endif %}</th>
-                    <td>{{ field }}</td>
+                    <th>{{ field }}</th>
                 </tr>
-            {% endfor %}
+                {% endfor %}
             </table>
             <input type="submit" value="Dodaj">
         </form>

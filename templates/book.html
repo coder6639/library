@@ -3,8 +3,15 @@
 <head>
     <meta charset="UTF-8">
     <title>Szczegóły książki</title>
+
 </head>
 <body>
+    <h2>Szczegóły książki</h2>
+    <p>
+        {% for item in book %}
+        {{ item }}
+        {% endfor %}
+    </p>
     <h3>Edytuj szczegóły:</h3>
     <form method="post" action="/library/{{ book_id }}/">
         {{ form.hidden_tag() }}
