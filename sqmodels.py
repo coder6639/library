@@ -38,7 +38,8 @@ class SQLibrary:
             new_data = []
             for item in data:
                 new_data.append(data[item])
-            self.c.execute(f"INSERT INTO books (title, author, pages, description, price) VALUES(?,?,?,?,?)", tuple(new_data[:5]))
+            self.c.execute(
+                f"INSERT INTO books (title, author, pages, description, price) VALUES(?,?,?,?,?)", tuple(new_data[:5]))
         except Error as e:
             print(e)
 
@@ -55,6 +56,12 @@ class SQLibrary:
     def save_all(self):
         try:
             self.conn.commit()
+        except Error as e:
+            print(e)
+
+    def delete(self, book_id):
+        try:
+            self.c.execute(f"DELETE FROM books WHERE id = {book_id}")
         except Error as e:
             print(e)
 

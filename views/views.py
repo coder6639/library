@@ -23,3 +23,11 @@ def book_details_view(book_id):
             bookstore.save_all()
         return redirect(url_for("library"))
     return render_template("book.html", form=form, book=book, book_id=book_id)
+
+
+def delete_view(book_id):
+    if request.method == "POST":
+        bookstore.delete(book_id)
+        bookstore.save_all()
+        return redirect(url_for("library"))
+    return render_template("delete.html")

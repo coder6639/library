@@ -7,11 +7,12 @@
 </head>
 <body>
     <h2>Szczegóły książki</h2>
-    <p>
+    <p1>
         {% for item in book %}
         {{ item }}
         {% endfor %}
-    </p>
+        <a href="/library/delete/{{ book_id }}">Usuń</a>
+    </p1>
     <h3>Edytuj szczegóły:</h3>
     <form method="post" action="/library/{{ book_id }}/">
         {{ form.hidden_tag() }}

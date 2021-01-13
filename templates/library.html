@@ -13,7 +13,7 @@
     <h3>Spis książek: </h3>
     <table class="top">
         <thead>
-        <th>#</th>
+        <th>id</th>
         <th>Title</th>
         <th>Author</th>
         <th>Pages</th>
@@ -25,7 +25,7 @@
             {% for item in book %}
             <th> {{ item }} </th>
             {% endfor %}
-            <th><a href="/library/{{ loop.index }}">Edytuj</a></th>
+            <th><a href="/library/{{ book[0] }}">Edytuj/usuń</a></th>
         </tr>
         {% endfor %}
     </table>
